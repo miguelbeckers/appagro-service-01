@@ -1,0 +1,1 @@
+https://start.spring.io/#!type=gradle-project&language=java&platformVersion=2.6.13&packaging=jar&jvmVersion=11&groupId=br.edu.utfpr&artifactId=servico-01&name=servico-01&description=cadastro%20de%20areas%20e%20usuarios&packageName=br.edu.utfpr.servico-01&dependencies=lombok,devtools,web,mysql,data-jpa
