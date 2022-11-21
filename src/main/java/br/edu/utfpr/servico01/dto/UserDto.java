@@ -8,5 +8,5 @@ public class UserDto {
   private String username;
   private String email;
   private String password;
-  // private AreaDto areaDto;
+  private String type;
 }

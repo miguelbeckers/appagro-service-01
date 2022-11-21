@@ -1,15 +1,14 @@
 package br.edu.utfpr.servico01.controller;
 
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,7 +21,7 @@ import br.edu.utfpr.servico01.dto.UserDto;
 import br.edu.utfpr.servico01.model.User;
 import br.edu.utfpr.servico01.service.UserService;
 
-@Repository
+@Controller
 @RequestMapping("/user")
 public class UserController {
 
@@ -35,56 +34,48 @@ public class UserController {
   }
 
   @GetMapping
-  public ResponseEntity<Object> findAll() {
+  public ResponseEntity<Object> getAll() {
     return ResponseEntity.ok(userService.findAll());
   }
 
   @GetMapping("{id}")
-  public ResponseEntity<Object> findById(@PathVariable String id) {
+  public ResponseEntity<Object> getById(@PathVariable String id) { 
     UUID uuid;
     try {
       uuid = UUID.fromString(id);
     } catch (Exception e) {
-      return ResponseEntity
-          .status(HttpStatus.BAD_REQUEST)
-          .body("id inválido");
+      return ResponseEntity.badRequest().build();
     }
 
     Optional<User> optional = userService.findById(uuid);
     if (optional.isEmpty()) {
-      return ResponseEntity
-          .status(HttpStatus.NOT_FOUND)
-          .body("usuário não encontrado");
+      return ResponseEntity.notFound().build();
     }
 
     return ResponseEntity.ok(optional.get());
   }
 
   @PostMapping
-  public ResponseEntity<User> save(@RequestBody UserDto userDto) {
+  public ResponseEntity<User> create(@Valid @RequestBody UserDto userDto) {
     User user = new User();
     BeanUtils.copyProperties(userDto, user);
-    return ResponseEntity.ok().body(userService.save(user));
+    return ResponseEntity.ok().body(userService.create(user));
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<Object> update(@PathVariable String id, @RequestBody UserDto userDto) {
+  public ResponseEntity<Object> update(@Valid @RequestBody UserDto userDto, @PathVariable String id) {
     UUID uuid;
     try {
       uuid = UUID.fromString(id);
     } catch (Exception e) {
-      return ResponseEntity
-          .status(HttpStatus.BAD_REQUEST)
-          .body("id inválido");
+      return ResponseEntity.badRequest().build();
     }
 
     Optional<User> optional = userService.findById(uuid);
     if (optional.isEmpty()) {
-      return ResponseEntity
-          .status(HttpStatus.NOT_FOUND)
-          .body("usuário não encontrado");
+      return ResponseEntity.notFound().build();
     }
-
+    
     User user = optional.get();
     BeanUtils.copyProperties(userDto, user);
     return ResponseEntity.ok().body(userService.update(user));
@@ -96,19 +87,15 @@ public class UserController {
     try {
       uuid = UUID.fromString(id);
     } catch (Exception e) {
-      return ResponseEntity
-          .status(HttpStatus.BAD_REQUEST)
-          .body("id inválido");
+      return ResponseEntity.badRequest().build();
     }
 
     Optional<User> optional = userService.findById(uuid);
     if (optional.isEmpty()) {
-      return ResponseEntity
-          .status(HttpStatus.NOT_FOUND)
-          .body("usuário não encontrado");
+      return ResponseEntity.notFound().build();
     }
 
-    userService.deleteById(uuid);
+    userService.delete(optional.get());
     return ResponseEntity.ok().build();
   }
 }
