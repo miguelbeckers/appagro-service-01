@@ -9,9 +9,8 @@ import lombok.Data;
 
 @Data
 public class AreaDto {
-  @NotEmpty
+  @NotEmpty(message = "nome inválido")
   private String name;
-  @NotEmpty
   private AreaType areaType;
   private List<String> coordinates;
 }

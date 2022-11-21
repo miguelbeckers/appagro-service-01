@@ -8,14 +8,14 @@ import lombok.Data;
 
 @Data
 public class UserDto {
-  @NotEmpty
+  @NotEmpty(message = "nome inválido")
   private String nome;
-  @NotEmpty
+  @NotEmpty(message = "username inválido")
   private String username;
-  @Email
+  @Email(message = "email inválido")
   private String email;
-  @NotEmpty
+  @NotEmpty(message = "senha inválida")
   private String password;
-  @NotEmpty
+  
   private UserType userType;
 }
