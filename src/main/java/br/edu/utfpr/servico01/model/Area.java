@@ -20,10 +20,16 @@ public class Area {
   @Id
   @Type(type = "org.hibernate.type.UUIDCharType")
   private UUID id;
+
   @Column(length = 100, nullable = false)
   private String name;
+
+  @Column(nullable = false)
+  private AreaType areaType;
+
   private LocalDateTime createdAt;
   private LocalDateTime UpdatedAt;
+  
   @ElementCollection
   private List<String> coordinates;
 
