@@ -3,6 +3,8 @@ package br.edu.utfpr.servico01.controller;
 import java.util.Optional;
 import java.util.UUID;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -76,7 +78,7 @@ public class AreaController {
   }
 
   @PostMapping("{id}")
-  public ResponseEntity<Object> create(@RequestBody AreaDto areaDto, @PathVariable String id) {
+  public ResponseEntity<Object> create(@Valid @RequestBody AreaDto areaDto, @PathVariable String id) {
     UUID uuid = null;
     try {
       uuid = UUID.fromString(id);
@@ -95,7 +97,7 @@ public class AreaController {
   }
 
   @PutMapping("{id}")
-  public ResponseEntity<Object> update(@PathVariable String id, @RequestBody AreaDto areaDto) {
+  public ResponseEntity<Object> update(@Valid @RequestBody AreaDto areaDto, @PathVariable String id) {
     UUID uuid = null;
     try {
       uuid = UUID.fromString(id);

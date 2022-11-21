@@ -23,19 +23,19 @@ public class User {
   @Type(type = "org.hibernate.type.UUIDCharType")
   private UUID id;
 
-  @Column(length = 100, nullable = false)
+  // @Column(length = 100, nullable = false)
   private String nome;
 
-  @Column(length = 100, nullable = false)
+  // @Column(length = 100, nullable = false)
   private String username;
 
-  @Column(length = 100, nullable = false)
+  // @Column(length = 100, nullable = false)
   private String email;
 
-  @Column(length = 100, nullable = false)
+  // @Column(length = 100, nullable = false)
   private String password;
 
-  @Column(nullable = false)
+  // @Column(nullable = false)
   private UserType userType;
 
   private LocalDateTime createdAt;
