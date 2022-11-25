@@ -26,6 +26,10 @@ public class UserService {
     return userRepository.findById(id);
   }
 
+  public Optional<User> findByUsername(String email){
+    return userRepository.findByUsername(email);
+  }
+
   public User create(User user){
     LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC"));
     user.setCreatedAt(now);

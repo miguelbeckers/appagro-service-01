@@ -1,6 +1,5 @@
 package br.edu.utfpr.servico01.dto;
 
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 
 import br.edu.utfpr.servico01.model.UserType;
@@ -12,8 +11,6 @@ public class UserDto {
   private String nome;
   @NotEmpty(message = "username inválido")
   private String username;
-  @Email(message = "email inválido")
-  private String email;
   @NotEmpty(message = "senha inválida")
   private String password;
   

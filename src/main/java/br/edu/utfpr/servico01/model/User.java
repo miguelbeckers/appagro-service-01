@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.UUID;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.hibernate.annotations.Type;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,8 +25,9 @@ public class User {
   @Type(type = "org.hibernate.type.UUIDCharType")
   private UUID id;
   private String nome;
+  @Column(unique = true)
   private String username;
-  private String email;
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   private String password;
   private UserType userType;
   private LocalDateTime createdAt;
