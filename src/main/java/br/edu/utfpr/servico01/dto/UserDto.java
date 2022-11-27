@@ -13,6 +13,5 @@ public class UserDto {
   private String username;
   @NotEmpty(message = "senha inválida")
   private String password;
-  
   private UserType userType;
 }
