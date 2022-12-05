@@ -17,7 +17,7 @@ import java.util.ArrayList;
 public class JwtValidationFilter extends BasicAuthenticationFilter {
 
     public static final String HEADER_ATTRIBUTE = "Authorization";
-    public static final String ATTRIBUTE_PREFIX = "Bearer";
+    public static final String ATTRIBUTE_PREFIX = "Bearer ";
 
     public JwtValidationFilter(AuthenticationManager authenticationManager) {
         super(authenticationManager);
