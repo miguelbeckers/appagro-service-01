@@ -17,17 +17,17 @@ import br.edu.utfpr.servico01.data.UserDetailImplementation;
 @EnableWebSecurity
 public class JwtConfiguration extends WebSecurityConfigurerAdapter {
 
-    private final UserDetailImplementation usuarioService;
+    private final UserDetailImplementation userService;
     private final PasswordEncoder passwordEncoder;
 
-    public JwtConfiguration(UserDetailImplementation usuarioService, PasswordEncoder passwordEncoder) {
-        this.usuarioService = usuarioService;
+    public JwtConfiguration(UserDetailImplementation userService, PasswordEncoder passwordEncoder) {
+        this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(usuarioService).passwordEncoder(passwordEncoder);
+        auth.userDetailsService(userService).passwordEncoder(passwordEncoder);
     }
 
     @Override
@@ -50,7 +50,6 @@ public class JwtConfiguration extends WebSecurityConfigurerAdapter {
         source.registerCorsConfiguration("/**", corsConfiguration);
         return source;
     }
-
 }
 
 

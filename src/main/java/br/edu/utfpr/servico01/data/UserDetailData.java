@@ -10,10 +10,10 @@ import java.util.Optional;
 
 public class UserDetailData implements UserDetails {
 
-    private final Optional<User> usuario;
+    private final Optional<User> user;
 
-    public UserDetailData(Optional<User> usuario) {
-        this.usuario = usuario;
+    public UserDetailData(Optional<User> user) {
+        this.user = user;
     }
 
     @Override
@@ -23,12 +23,12 @@ public class UserDetailData implements UserDetails {
 
     @Override
     public String getPassword() {
-        return usuario.orElse(new User()).getPassword();
+        return user.orElse(new User()).getPassword();
     }
 
     @Override
     public String getUsername() {
-        return usuario.orElse(new User()).getUsername();
+        return user.orElse(new User()).getUsername();
     }
 
     @Override
