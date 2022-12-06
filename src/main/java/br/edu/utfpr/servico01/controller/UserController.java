@@ -1,5 +1,6 @@
 package br.edu.utfpr.servico01.controller;
 
+import java.security.Principal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -9,8 +10,11 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,6 +29,7 @@ import br.edu.utfpr.servico01.model.User;
 import br.edu.utfpr.servico01.service.UserService;
 
 @Controller
+@CrossOrigin
 @RequestMapping("/user")
 public class UserController {
 
@@ -65,6 +70,22 @@ public class UserController {
   public ResponseEntity<Object> getByUsername(@PathVariable String username) {
     try {
       Optional<User> optional = userService.findByUsername(username);
+      if (optional.isEmpty()) {
+        return ResponseEntity.notFound().build();
+      }
+
+      return ResponseEntity.ok(optional.get());
+    } catch (Exception e) {
+      System.out.println(e);
+      return null;
+    }
+  }
+
+  @GetMapping("/token")
+  public ResponseEntity<Object> getByToken() {
+    try {
+      Authentication authentication =  SecurityContextHolder.getContext().getAuthentication();
+      Optional<User> optional = userService.findByUsername(authentication.getName());
       if (optional.isEmpty()) {
         return ResponseEntity.notFound().build();
       }

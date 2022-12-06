@@ -8,7 +8,7 @@ import lombok.Data;
 @Data
 public class UserDto {
   @NotEmpty(message = "nome inválido")
-  private String nome;
+  private String name;
   @NotEmpty(message = "username inválido")
   private String username;
   @NotEmpty(message = "senha inválida")
