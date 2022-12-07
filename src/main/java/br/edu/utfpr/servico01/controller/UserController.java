@@ -1,6 +1,5 @@
 package br.edu.utfpr.servico01.controller;
 
-import java.security.Principal;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -136,6 +135,7 @@ public class UserController {
 
     User user = optional.get();
     BeanUtils.copyProperties(userDto, user);
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
     return ResponseEntity.ok().body(userService.update(user));
   }
 

@@ -58,6 +58,8 @@ public class JwtValidationFilter extends BasicAuthenticationFilter {
             return null;
         }
 
+        //verifica se o usuario existe
+
         return new UsernamePasswordAuthenticationToken(user,null, new ArrayList<>());
     }
 }

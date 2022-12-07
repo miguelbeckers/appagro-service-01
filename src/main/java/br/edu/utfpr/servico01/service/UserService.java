@@ -33,6 +33,7 @@ public class UserService {
   public User create(User user){
     LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC"));
     user.setCreatedAt(now);
+    user.setUpdatedAt(now);
     return userRepository.save(user);
   }
 
