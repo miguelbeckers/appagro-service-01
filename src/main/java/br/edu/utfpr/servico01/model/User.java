@@ -29,6 +29,7 @@ public class User {
   private LocalDateTime createdAt;
   private LocalDateTime UpdatedAt;
 
+  @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
   @OneToMany(cascade = CascadeType.ALL)
   private List<Area> areas;
 

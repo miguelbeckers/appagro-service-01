@@ -39,6 +39,7 @@ public class AreaService {
   public Area create(Area area, User user){
     LocalDateTime now = LocalDateTime.now(ZoneId.of("UTC"));
     area.setCreatedAt(now);
+    area.setUpdatedAt(now);
     Area created = areaRepository.save(area);
 
     user.insertArea(area);
